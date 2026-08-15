@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    options {
+        // Evita que dos ejecuciones simultaneas se eliminen el contenedor entre si
+        disableConcurrentBuilds()
+    }
+
     environment {
         IMAGEN     = 'jenkins-docker-tzib'
         TAG        = "${env.BUILD_NUMBER}"
@@ -66,7 +71,20 @@ pipeline {
                 echo "Comprobando que la aplicacion responde..."
                 sh '''
                     sleep 3
-                    docker exec ${CONTENEDOR} wget -q -O - http://localhost/ | head -n 5
+
+                    # El contenedor debe seguir en ejecucion
+                    if [ "$(docker inspect -f '{{.State.Running}}' ${CONTENEDOR} 2>/dev/null)" != "true" ]; then
+                        echo "ERROR: el contenedor ${CONTENEDOR} no esta en ejecucion"
+                        docker ps -a -f name=${CONTENEDOR}
+                        exit 1
+                    fi
+
+                    # La pagina debe responder y contener el mensaje esperado
+                    docker exec ${CONTENEDOR} wget -q -O /tmp/salida.html http://localhost/
+                    docker exec ${CONTENEDOR} grep -q "Aplicacion desplegada con Jenkins y Docker" /tmp/salida.html \\
+                        || docker exec ${CONTENEDOR} grep -q "Aplicaci" /tmp/salida.html
+
+                    echo "OK: la aplicacion responde correctamente en el puerto ${PUERTO}"
                 '''
             }
         }
