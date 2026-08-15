@@ -191,7 +191,57 @@ número de build de Jenkins, y el contenedor anterior es reemplazado automática
 
 ---
 
-## 7. Comandos útiles de verificación
+## 7. Resultados obtenidos
+
+Registro de las ejecuciones realizadas en el job `primerpipeline`:
+
+| Build | Imagen generada | Resultado | Observación |
+|---|---|---|---|
+| #3 | `jenkins-docker-tzib:3` | SUCCESS | Primer despliegue verificado en el puerto 8090 (versión 1.0 de la página). |
+| #4 | `jenkins-docker-tzib:4` | SUCCESS | Despliegue tras modificar `index.html`; el contenedor anterior fue reemplazado (versión 2.0). |
+
+Salida final de la consola de Jenkins en el build #4:
+
+```
+==================================================
+ PROCESO EXITOSO
+ Imagen desplegada: jenkins-docker-tzib:4
+ Aplicacion disponible en: http://localhost:8090
+==================================================
+Finished: SUCCESS
+```
+
+Estado del contenedor desplegado por el pipeline:
+
+```
+NAMES      IMAGE                     STATUS   PORTS
+web-tzib   jenkins-docker-tzib:4     Up       0.0.0.0:8090->80/tcp
+```
+
+### Cambio visual aplicado en la prueba de actualización
+
+| Versión 1.0 (antes) | Versión 2.0 (después) |
+|---|---|
+| Fondo en degradado azul petróleo | Fondo en degradado morado, azul y magenta |
+| Título en degradado azul y verde | Título en degradado amarillo y naranja |
+| — | Aviso nuevo: “Actualización aplicada…” |
+| Pie: *Versión 1.0* | Pie: *Versión 2.0* |
+
+### Incidencia encontrada y corregida
+
+En la primera ejecución el contenedor desplegado fue eliminado por una ejecución concurrente del
+pipeline, y la etapa de confirmación no lo detectó porque el resultado del comando se perdía al
+enviarse a través de una tubería (`| head`), lo que devolvía siempre un código de salida exitoso.
+
+Se corrigió de dos formas:
+
+1. Se agregó `options { disableConcurrentBuilds() }` para impedir ejecuciones simultáneas.
+2. La etapa `Confirmacion` ahora valida con `docker inspect` que el contenedor esté en ejecución y
+   que la página responda; si no es así, termina con `exit 1` y el build se marca como fallido.
+
+---
+
+## 8. Comandos útiles de verificación
 
 ```bash
 docker images | grep jenkins-docker-tzib   # imágenes generadas por cada build
