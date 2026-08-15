@@ -14,8 +14,8 @@
       align-items: center;
       justify-content: center;
       padding: 24px;
-      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-      color: #e8eef2;
+      background: linear-gradient(135deg, #2b1055 0%, #7597de 50%, #b06ab3 100%);
+      color: #f5f0fa;
     }
 
     .card {
@@ -50,7 +50,7 @@
       text-align: center;
       font-size: 1.9rem;
       margin-bottom: 6px;
-      background: linear-gradient(90deg, #4fc3f7, #81c784);
+      background: linear-gradient(90deg, #ffd54f, #ff8a65);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -96,8 +96,18 @@
       font-weight: 700;
       padding: 20px;
       border-radius: 12px;
-      background: linear-gradient(90deg, rgba(79, 195, 247, 0.18), rgba(129, 199, 132, 0.18));
-      border: 1px solid rgba(129, 199, 132, 0.4);
+      background: linear-gradient(90deg, rgba(255, 213, 79, 0.2), rgba(255, 138, 101, 0.2));
+      border: 1px solid rgba(255, 213, 79, 0.5);
+    }
+
+    .actualizacion {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px dashed rgba(255, 255, 255, 0.3);
     }
 
     footer {
@@ -146,7 +156,12 @@
 
     <p class="mensaje">Aplicación desplegada con Jenkins y Docker</p>
 
-    <footer>Parcial 1 &middot; III Serie &middot; Versión 1.0</footer>
+    <p class="actualizacion">
+      &#9998; <strong>Actualización aplicada:</strong> este cambio se publicó en GitHub
+      y Jenkins lo desplegó automáticamente en un nuevo contenedor.
+    </p>
+
+    <footer>Parcial 1 &middot; III Serie &middot; Versión 2.0</footer>
   </main>
 </body>
 </html>
