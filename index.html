@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jenkins + Docker | Jefferson Tzib</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      color: #e8eef2;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 620px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 18px;
+      padding: 40px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+
+    .logos {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .chip {
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.9rem;
+      margin-bottom: 6px;
+      background: linear-gradient(90deg, #4fc3f7, #81c784);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      opacity: 0.75;
+      margin-bottom: 30px;
+    }
+
+    .datos { list-style: none; }
+
+    .datos li {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.98rem;
+    }
+
+    .datos li:last-child { border-bottom: none; }
+
+    .datos .etiqueta {
+      opacity: 0.65;
+      text-transform: uppercase;
+      font-size: 0.76rem;
+      letter-spacing: 1px;
+      padding-top: 3px;
+    }
+
+    .datos .valor {
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .mensaje {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 20px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(79, 195, 247, 0.18), rgba(129, 199, 132, 0.18));
+      border: 1px solid rgba(129, 199, 132, 0.4);
+    }
+
+    footer {
+      margin-top: 22px;
+      text-align: center;
+      font-size: 0.78rem;
+      opacity: 0.55;
+    }
+
+    @media (max-width: 520px) {
+      .card { padding: 28px 22px; }
+      .datos li { flex-direction: column; gap: 4px; }
+      .datos .valor { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="logos">
+      <span class="chip">Jenkins</span>
+      <span class="chip">Docker</span>
+      <span class="chip">Nginx</span>
+    </div>
+
+    <h1>Integración Continua</h1>
+    <p class="subtitle">GitHub &rarr; Jenkins &rarr; Imagen Docker &rarr; Contenedor Web</p>
+
+    <ul class="datos">
+      <li>
+        <span class="etiqueta">Nombre completo</span>
+        <span class="valor">Jefferson Alejandro Tzib Figueroa</span>
+      </li>
+      <li>
+        <span class="etiqueta">Número de carné</span>
+        <span class="valor">4090-21-14885</span>
+      </li>
+      <li>
+        <span class="etiqueta">Curso</span>
+        <span class="valor">Aseguramiento de la Calidad de Software</span>
+      </li>
+      <li>
+        <span class="etiqueta">Fecha de realización</span>
+        <span class="valor">14 de agosto de 2026</span>
+      </li>
+    </ul>
+
+    <p class="mensaje">Aplicación desplegada con Jenkins y Docker</p>
+
+    <footer>Parcial 1 &middot; III Serie &middot; Versión 1.0</footer>
+  </main>
+</body>
+</html>
